@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Connexion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+  <form [formGroup]="connexionForm" (submit)="connexion(connexionForm.value)"> 
+    <ion-list> 
+      <ion-item> 
+        <ion-label position="stacked">Email</ion-label> 
+        <ion-input  formControlName="Mail" type="text" required minlength="2" #actor="ngModel"></ion-input> 
+      </ion-item> 
+      <ion-item> 
+        <ion-label position="stacked">Mot de passe</ion-label> 
+        <ion-input formControlName="Motdepass" type="password" required minlength="2" #actor="ngModel"></ion-input> 
+      </ion-item> 
+    </ion-list> 
+    <ion-button type="submit" expand="full">Se connecter</ion-button> 
+    <a href="/inscription">S'inscrire</a> - <a href="/reset-password">Mot de passe oublié ?</a>
+  </form> 
+</ion-content>

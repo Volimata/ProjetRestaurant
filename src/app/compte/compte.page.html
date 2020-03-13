@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Compte
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="welcome-card">
+    <img src="/assets/icon/chef.jpg" alt="" />
+    <ion-card-header>
+      <ion-card-subtitle>Bienvenue</ion-card-subtitle>
+      <ion-card-title>Gestion des commandes de déjeuner </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-list lines="none">
+    <ion-list-header>
+      <ion-label>Informations Personnelles</ion-label>
+    </ion-list-header>
+    <ion-item >
+      <ion-icon slot="start" color="medium" name="person"></ion-icon>
+      <ion-label>{{username}}</ion-label>
+      <ion-label>{{token}}</ion-label>
+      
+    </ion-item>
+    <ion-button expand="block" color="danger" (click)="deconnexion()"> Deconnexion </ion-button>
+  </ion-list>
+</ion-content>
+
+
+

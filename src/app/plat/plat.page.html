@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      liste des plats
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" routerLink="/tabs/plat/ajouter">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+    <ion-list> 
+      <ion-item *ngFor="let plat of plats" >
+        <ion-label>{{plat.nom}}</ion-label>
+        <ion-label>{{plat.prix}}</ion-label>
+        <ion-label>
+          <ion-icon name="create" color="primary" (click)="modifierPlat(plat.id)"></ion-icon>
+        </ion-label>
+        <ion-label>
+          <ion-icon name="trash" color="danger" (click)="supprimer(plat.id)"></ion-icon>
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+</ion-content>
