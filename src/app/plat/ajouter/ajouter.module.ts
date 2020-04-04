@@ -10,7 +10,6 @@ import { AjouterPage } from './ajouter.page';
 
 @NgModule({
   imports: [
-    NgModule,
     CommonModule,
     FormsModule,
     IonicModule,

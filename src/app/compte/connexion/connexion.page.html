@@ -9,14 +9,14 @@
     <ion-list> 
       <ion-item> 
         <ion-label position="stacked">Email</ion-label> 
-        <ion-input  formControlName="Mail" type="text" required minlength="2" #actor="ngModel"></ion-input> 
+        <ion-input  formControlName="identifier" type="text" ></ion-input> 
       </ion-item> 
       <ion-item> 
         <ion-label position="stacked">Mot de passe</ion-label> 
-        <ion-input formControlName="Motdepass" type="password" required minlength="2" #actor="ngModel"></ion-input> 
+        <ion-input formControlName="password" type="password" ></ion-input> 
       </ion-item> 
     </ion-list> 
-    <ion-button type="submit" expand="full">Se connecter</ion-button> 
-    <a href="/inscription">S'inscrire</a> - <a href="/reset-password">Mot de passe oublié ?</a>
+    <ion-button color="danger"  shape="round" type="submit" expand="full" routerLink="/tabs/menu" >Se connecter</ion-button> 
+    <a style="color: danger;" routerLink="/inscription">S'inscrire</a> - <a style="color: danger;" routerLink="/reset-password">Mot de passe oublié ?</a>
   </form> 
 </ion-content>

@@ -1,35 +1,49 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, from } from 'rxjs';
 import { Plat } from '../Models/plat';
-import { Observable } from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import { URL } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlatService {
 
-  constructor(private http:HttpClient) { }
+  token = window.localStorage.getItem('token');;
 
-  add (plat: Plat): Observable<Plat>{
-      return this.http.post<Plat>('http://localhost:1337/plats/',plat ).pipe();
+  constructor(private httpClient : HttpClient) { }
 
-  };
-  delete(id: number): Observable<Plat>{
-    
-    return  this.http.delete<Plat>('http://localhost:1337/plats/'+ id ).pipe();
-
-  };
-  update(plat: Plat): Observable<Plat>{
-    return this.http.put<Plat>('http://localhost:1337/plats/'+plat.id, plat).pipe();
-
-  };
-  get(id: number): Observable<Plat>{
-    return this.http.get<Plat>('http://localhost:1337/plats/'+ id ).pipe();
-
-  };
-  getAll(): Observable<Plat[]>{
-    return this.http.get<Plat[]>('http://localhost:1337/plats').pipe();
-   
-
+  postPlat(plat : Plat): Observable<Plat> {
+    return this.httpClient.post<Plat>(URL + "/Plats",plat,{
+      headers: {
+        //Authorization: `Bearer ${this.token}`,
+      },}).pipe();
   }
+  getPlats():Observable<Plat[]>
+  {
+    return this.httpClient.get<Plat[]>(URL+"/Plats").pipe();
+  }
+
+  getPlat(id :number):Observable<Plat>
+  {
+    return this.httpClient.get<Plat>(URL+'/Plats/'+id).pipe();
+  }
+
+  deletePlat(id : number)
+  {
+    return this.httpClient.delete(URL+'/Plats/'+id,{
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },}).pipe();
+  }
+  
+
+ updatePlat(id : number, plat) : Observable <Plat>
+  {
+    return this.httpClient.put<Plat>(URL+'/Plats/'+id, plat,{
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },}).pipe();
+  }
+
 }

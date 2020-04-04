@@ -12,20 +12,32 @@ import { UtilsService } from 'src/app/utils.service';
 })
 export class InscriptionPage implements OnInit {
 
-  registerForm: FormGroup; constructor(private formBuilder: FormBuilder, 
-    private service: AuthService, 
-    private route: Router, 
-    private utils: UtilsService) { } 
-    ngOnInit() { this.registerForm = this.formBuilder.group({ 
-      'login' : [null, [Validators.required,Validators.minLength(3)]], 
-      'email' : [null, [Validators.required,Validators.email]], 
-      'motdepass' : [null, [Validators.required]] });
+  inscriptionForm: FormGroup;
+  user:Utilisateur
+  constructor(private service: AuthService, 
+    private utils: UtilsService, 
+    private formBuilder: FormBuilder, 
+    private route: Router) {
+      this.user =this.user
      }
-     register(userInfo: Utilisateur){
-      console.log(this.registerForm);
-      this.service.register(userInfo).subscribe(data=>{
+
+    ngOnInit() { this.inscriptionForm = this.formBuilder.group({ 
+      'username' : [null, [Validators.required,Validators.minLength(3)]], 
+      'mail' : [null, [Validators.required,Validators.email]], 
+      'nom' : [null,[Validators.required,  ]],
+      'prenom' : [null, [Validators.required]],
+      'adresse' : [null, [Validators.required]],
+      'phone' : [null,[Validators.required]],
+      'password' : [null, [Validators.required]],
+      'cpassword' : [null, [Validators.required]]
+
+    });
+     }
+     inscription(){
+        this.service.inscription(this.inscriptionForm.value).subscribe(data=>{
+          console.log(this.inscriptionForm.value);
         this.utils.presentToast('Inscription réussie','success');
-        this.route.navigateByUrl('login');
+        this.route.navigateByUrl('connexion');
       },
     error=>{ 
       switch(error.error.message[0].message[0].id){

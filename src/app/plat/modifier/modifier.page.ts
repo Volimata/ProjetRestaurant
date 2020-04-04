@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PlatService } from 'src/app/services/plat.service';
+import { Plat } from 'src/app/Models/plat';
+import { NavController } from '@ionic/angular';
+import { UtilsService } from 'src/app/utils.service';
 
 @Component({
   selector: 'app-modifier',
@@ -7,14 +12,51 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./modifier.page.scss'],
 })
 export class ModifierPage implements OnInit {
-  id: number;
 
-  constructor(private route:ActivatedRoute) {
-    this.id=Number(this.route.snapshot.paramMap.get('id'));
-    console.log("id="+this.id);
-   }
+  
+  nomControl: FormControl;
+  prixControl: FormControl;
+  descriptionControl: FormControl;
+  formGroup: FormGroup;
+  platId: number;
+  plat: Plat;
+  restaurantControl: FormControl;
+
+  constructor(
+    private builder: FormBuilder, 
+    private route: ActivatedRoute,
+    private nav : NavController, 
+    private service: PlatService, 
+    private router : Router,
+    private utils: UtilsService) {
+    this.platId = Number(this.route.snapshot.paramMap.get('id'));
+    this.service.getPlat(this.platId).subscribe(plat => {
+      this.plat = plat;
+      this.nomControl = new FormControl(this.plat.nom, [Validators.required, Validators.minLength(2)]);
+      this.prixControl = new FormControl(this.plat.prix, Validators.required);
+      this.descriptionControl = new FormControl(this.plat.description);
+      
+      this.formGroup = this.builder.group({
+        nom: this.nomControl,
+        prix: this.prixControl,
+        description: this.descriptionControl,
+        restaurant : this.restaurantControl
+      })
+    })
+
+  }
+
+  modifier(): void {
+    this.service.updatePlat(this.plat.id, this.formGroup.value).subscribe(plat=> {
+      this.nav.back();
+    })
+  }
 
   ngOnInit() {
+    
   }
+
+  
+  
 
 }

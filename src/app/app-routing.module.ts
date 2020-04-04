@@ -4,6 +4,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'accueil',
+    pathMatch: 'full'
+  },
+
+  {
+    path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
@@ -14,7 +20,10 @@ const routes: Routes = [
     path: 'profil',
     loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule)
   },
- 
+ {
+   path: 'inscription',
+   loadChildren: () => import('./compte/inscription/inscription.module').then( m =>m.InscriptionPageModule)
+ }
   
   
 ];

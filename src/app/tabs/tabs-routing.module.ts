@@ -1,24 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { AuthGuard } from '../auth.guard';
 
 const routes: Routes = [
   {
     path: 'tabs',
     component: TabsPage,
     children: [
-      {
-        path: 'accueil',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../accueil/accueil.module').then(m => m.AccueilPageModule)
-          }
-          
-
-        ]
-      },
+      
       {
         path: 'menu',
         children: [
@@ -64,6 +54,17 @@ const routes: Routes = [
             path: 'inscription',
             loadChildren: () => import('../compte/inscription/inscription.module').then( m => m.InscriptionPageModule)
           }          
+
+        ]
+      },
+      {
+        path: 'profil',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../profil/profil.module').then(m => m.ProfilPageModule)
+          }
 
         ]
       },

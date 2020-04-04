@@ -2,7 +2,7 @@
   <ion-toolbar> 
     <ion-title>Inscription</ion-title> 
     <ion-buttons slot="start"> 
-      <ion-back-button defaultHref="/connexion"></ion-back-button> 
+      <ion-back-button defaultHref="compte/connexion"></ion-back-button> 
     </ion-buttons> 
   </ion-toolbar> 
 </ion-header>
@@ -10,31 +10,39 @@
 <ion-content>
   <ion-content>
 
-    <form [formGroup]="inscriptionForm" (submit)="inscription(inscriptionForm.value)" >
+    <form [formGroup]="inscriptionForm" (submit)="inscription()" >
       <ion-list>
-      <ion-item >
-        <ion-label color="black">Nom:</ion-label>
-        <ion-input color="black" type="text" placeholder="Votre Nom"></ion-input>
+        <ion-item>
+          <ion-label position="stacked">Nom d'utilisateur :</ion-label>
+          <ion-input formControlName="username" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Email:</ion-label>
+          <ion-input formControlName="mail" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Nom  :</ion-label>
+          <ion-input formControlName="nom" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Prenom :</ion-label>
+          <ion-input formControlName="prenom" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Adresse :</ion-label>
+          <ion-input formControlName="adresse" type="text"></ion-input>
+        </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Téléphone:</ion-label>
+        <ion-input formControlName="phone" type='number'></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label color ="black"> Prénom:</ion-label>
-        <ion-input color="black" type="text" placeholder="Votre Prénom"></ion-input>
+        <ion-label position="stacked">Mot de passe:</ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label color="black">Mail:</ion-label>
-        <ion-input color="black" type="mail" placeholder="Adresse mail"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label color="black">Téléphone:</ion-label>
-        <ion-input color="black" type ="text" placeholder="Téléphone"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label color="black">Mot de passe:</ion-label>
-        <ion-input color="black" type="password" placeholder="Mot de passe"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label color="black">Confirmer mot de passe:</ion-label>
-        <ion-input color="black" type="password" placeholder="Mot de passe"></ion-input>
+        <ion-label position="stacked">Confirmer mot de passe:</ion-label>
+        <ion-input formControlName="cpassword" type="password"></ion-input>
       </ion-item>
     </ion-list>
       <ion-button color="danger" shape="round" type="submit" expand="full">Valider</ion-button> 
